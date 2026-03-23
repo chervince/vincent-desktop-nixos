@@ -10,7 +10,8 @@
         user.email = "chervince@users.noreply.github.com";
         init.defaultBranch = "main";
         pull.rebase = true;
-        credential.helper = "!/run/current-system/sw/bin/gh auth git-credential";
+        credential.helper = "!/etc/profiles/per-user/vincent/bin/gh auth git-credential";
+        safe.directory = "/etc/nixos";
       };
     };
 
