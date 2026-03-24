@@ -37,6 +37,10 @@
 
       # Terminal
       "terminal.integrated.defaultProfile.linux" = "fish";
+
+      # Claude Code
+      "claudeCode.useTerminal" = true;
+      "claudeCode.selectedModel" = "claude-opus-4-6-20250514";
     };
   };
 }

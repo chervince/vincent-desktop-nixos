@@ -6,9 +6,14 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    open = true;
+    open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  hardware.graphics = {                                                                     
+    enable = true;                                                                        
+    enable32Bit = true;  # indispensable pour Steam/Proton (jeux 32-bit)
   };
 
   # Variables d'environnement pour Wayland + NVIDIA
@@ -17,7 +22,4 @@
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NIXOS_OZONE_WL = "1";
   };
-
-  # Suspend/resume/hibernate NVIDIA
-  hardware.nvidia.powerManagement.enable = true;
 }

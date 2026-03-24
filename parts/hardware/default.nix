@@ -4,5 +4,6 @@
     ./nvidia.nix
     ./audio.nix
     ./disks.nix
+    ./gaming.nix
   ];
 }

@@ -5,4 +5,6 @@
     enable = true;
     dedicatedServer.openFirewall = false;
   };
+
+  programs.gamescope.enable = true;
 }

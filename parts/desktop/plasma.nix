@@ -3,6 +3,9 @@
 {
   services.desktopManager.plasma6.enable = true;
 
+  # Activer X11 pour avoir la session Plasma (X11) disponible                             
+  services.xserver.enable = true;
+
   # SDDM comme display manager (Wayland natif)
   services.displayManager.sddm = {
     enable = true;
