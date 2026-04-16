@@ -1,7 +1,7 @@
-# Pilotes NVIDIA RTX 4060 (open) pour Wayland
+# Pilotes NVIDIA RTX 4060 pour Wayland
 { config, ... }:
 {
-  # Pilotes propriétaires NVIDIA (open kernel modules pour Turing+)
+  # Pilotes propriétaires NVIDIA
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
@@ -9,12 +9,29 @@
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    # Préserve les allocations VRAM au suspend/resume
+    # Sans ça, KWin perd son contexte GL au réveil → crash Xid 13
+    powerManagement.enable = true;
+
+    # Sauvegarde complète de la VRAM au suspend (plus lent mais plus fiable)
+    powerManagement.finegrained = false;
   };
 
-  hardware.graphics = {                                                                     
-    enable = true;                                                                        
+  # Maintient le driver NVIDIA chargé en permanence (évite les crashs au reload)
+  hardware.nvidia.nvidiaPersistenced = true;
+
+  hardware.graphics = {
+    enable = true;
     enable32Bit = true;  # indispensable pour Steam/Proton (jeux 32-bit)
   };
+
+  # Désactive le dynamic power management NVIDIA (évite que le GPU reste en P5 sur Wayland)
+  # + PreserveVideoMemoryAllocations pour le suspend/resume
+  boot.extraModprobeConfig = ''
+    options nvidia NVreg_DynamicPowerManagement=0x00
+    options nvidia NVreg_PreserveVideoMemoryAllocations=1
+  '';
 
   # Variables d'environnement pour Wayland + NVIDIA
   environment.sessionVariables = {

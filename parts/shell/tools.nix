@@ -18,7 +18,12 @@
     programs.bat = {
       enable = true;
     };
-
+    # vim
+    programs.vim = {
+	enable = true;
+	defaultEditor = true;
+    };
+	
     # Paquets CLI supplémentaires
     home.packages = with pkgs; [
       ripgrep

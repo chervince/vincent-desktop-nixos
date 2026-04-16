@@ -5,5 +5,6 @@
     ./ssh.nix
     ./cups.nix
     ./scanner.nix
+    ./jellyfin.nix
   ];
 }

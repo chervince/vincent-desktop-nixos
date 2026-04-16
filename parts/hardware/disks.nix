@@ -45,4 +45,11 @@
     fsType = "vfat";
     options = [ "nofail" "uid=1000" "gid=100" "dmask=022" "fmask=133" ];
   };
+
+  # Swap — filet de sécurité contre l'OOM (cargo build + vitest + VS Code)
+  swapDevices = [{ device = "/swapfile"; size = 16384; }];
+
+  # Swappiness basse — le kernel n'utilise le swap qu'en dernier recours
+  # (defaut: 60, ici 10 = priorite RAM pour le gaming et l'usage courant)
+  boot.kernel.sysctl."vm.swappiness" = 10;
 }

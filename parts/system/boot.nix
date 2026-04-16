@@ -1,5 +1,5 @@
 # Bootloader systemd-boot et paramètres de démarrage
-{ ... }:
+{ pkgs, ... }:
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -14,4 +14,7 @@
 
   # TRIM à travers LUKS pour la longévité du SSD
   boot.initrd.luks.devices."cryptroot".allowDiscards = true;
+
+  # Kernel Xanmod — scheduler BORE + optimisations gaming (proche du kernel CachyOS)
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 }

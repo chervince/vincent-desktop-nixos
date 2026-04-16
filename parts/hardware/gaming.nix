@@ -1,15 +1,6 @@
-# Gaming — Steam, Gamemode, MangoHUD, optimisations perf
+# Gaming — MangoHUD, NVIDIA hardware decode
 { pkgs, ... }:
 {
-  # Steam avec Proton
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-  };
-
-  # Gamemode — optimise CPU governor, nice, scheduler pendant le jeu
-  programs.gamemode.enable = true;
-
   # MangoHUD overlay (FPS, frametime, GPU/CPU stats)
   environment.systemPackages = with pkgs; [
     mangohud

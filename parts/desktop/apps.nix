@@ -6,5 +6,11 @@
     inkscape
     masterpdfeditor4
     filezilla
+    nextcloud-client
+    thunderbird
+    onlyoffice-desktopeditors
+    qbittorrent
+    mpv
+    obsidian
   ];
 }
