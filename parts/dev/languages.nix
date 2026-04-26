@@ -4,7 +4,7 @@
   home-manager.users.vincent.home.packages = with pkgs; [
     # Node.js + pnpm
     nodejs
-    nodePackages.pnpm
+    pnpm
 
     # Python
     python3
@@ -19,7 +19,5 @@
     postgresql
     sqlite
 
-    # Claude CLI
-    claude-code
   ];
 }

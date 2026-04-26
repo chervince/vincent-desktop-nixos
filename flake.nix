@@ -12,11 +12,26 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Assistants IA
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    codex-cli-nix = {
+      url = "github:sadjow/codex-cli-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hermes-agent = {
+      url = "github:NousResearch/hermes-agent";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }: {
+  outputs = { nixpkgs, home-manager, claude-code, codex-cli-nix, hermes-agent, ... }: {
     nixosConfigurations.vincent-desktop-nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit claude-code codex-cli-nix hermes-agent; };
       modules = [
         ./hardware-configuration.nix
         ./parts
@@ -24,6 +39,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "hm-backup";
         }
       ];
     };

@@ -1,4 +1,4 @@
-# parts/dev/ — Git, langages, VS Code, Docker
+# parts/dev/ — Git, langages, VS Code, Docker, assistants IA
 {
   imports = [
     ./git.nix
@@ -6,5 +6,6 @@
     ./vscode.nix
     ./docker.nix
     ./android.nix
+    ./assistants.nix
   ];
 }
