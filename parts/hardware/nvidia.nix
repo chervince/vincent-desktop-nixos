@@ -39,4 +39,18 @@
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NIXOS_OZONE_WL = "1";
   };
+
+  # Lock les clocks GPU à 2500+ MHz au boot
+  # Le driver NVIDIA ne détecte pas les jeux via Xwayland → reste en "Idle" avec des clocks bas
+  # Ce service force les clocks hauts pour contourner le bug
+  systemd.services.nvidia-gpu-clock-lock = {
+    description = "Lock NVIDIA GPU clocks for gaming performance";
+    after = [ "nvidia-persistenced.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi -lgc 2500,3105";
+      ExecStop = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi -rgc";
+    };
+  };
 }
