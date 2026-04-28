@@ -46,10 +46,15 @@
     options = [ "nofail" "uid=1000" "gid=100" "dmask=022" "fmask=133" ];
   };
 
-  # Swap — filet de sécurité contre l'OOM (cargo build + vitest + VS Code)
-  swapDevices = [{ device = "/swapfile"; size = 16384; }];
+  # zram — swap compressé en RAM (zstd), remplace le swapfile disque.
+  # 25% de 31 Gio ≈ 7,7 Gio compressés, ~20+ Gio effectifs avec zstd.
+  swapDevices = [ ];
+  zramSwap = {
+    enable = true;
+    memoryPercent = 25;
+    algorithm = "zstd";
+  };
 
-  # Swappiness basse — le kernel n'utilise le swap qu'en dernier recours
-  # (defaut: 60, ici 10 = priorite RAM pour le gaming et l'usage courant)
-  boot.kernel.sysctl."vm.swappiness" = 10;
+  # Swappiness élevée pour zram (compression RAM rapide, pas de disque)
+  boot.kernel.sysctl."vm.swappiness" = 100;
 }
