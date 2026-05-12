@@ -10,6 +10,7 @@
     thunderbird
     onlyoffice-desktopeditors
     qbittorrent
+    stremio-linux-shell
     mpv
     obsidian
   ];

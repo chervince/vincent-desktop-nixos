@@ -25,14 +25,14 @@
         extraOptions = { ServerAliveInterval = "60"; ServerAliveCountMax = "3"; };
       };
       "wordpress-syd" = {
-        hostname = "2400:8907::2000:44ff:fe7c:ac9e";
+        hostname = "172.105.179.160";
         user = "vincent";
         port = 2222;
         identityFile = "~/.ssh/id_ed25519";
         extraOptions = { ServerAliveInterval = "60"; ServerAliveCountMax = "3"; StrictHostKeyChecking = "no"; };
       };
-      "wordpress-syd-ipv4" = {
-        hostname = "172.105.179.160";
+      "wordpress-syd-ipv6" = {
+        hostname = "2400:8907::2000:44ff:fe7c:ac9e";
         user = "vincent";
         port = 2222;
         identityFile = "~/.ssh/id_ed25519";
