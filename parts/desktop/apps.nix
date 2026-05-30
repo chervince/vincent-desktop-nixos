@@ -11,7 +11,9 @@
     onlyoffice-desktopeditors
     qbittorrent
     stremio-linux-shell
+    ffmpeg            # serveur de transcodage de Stremio (ffprobe/ffmpeg)
     mpv
     obsidian
+    discord
   ];
 }
