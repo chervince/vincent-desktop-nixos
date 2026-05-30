@@ -1,6 +1,6 @@
-# Assistants IA — Claude Code, Codex, Hermes
+# Assistants IA — Claude Code, Codex
 # mcp-nixos retiré du paquet (build cassé upstream aioboto3) — utiliser via nix run
-{ pkgs, claude-code, codex-cli-nix, hermes-agent, ... }:
+{ pkgs, claude-code, codex-cli-nix, ... }:
 let
   system = "x86_64-linux";
 in
@@ -9,7 +9,6 @@ in
     home.packages = [
       claude-code.packages.${system}.default
       codex-cli-nix.packages.${system}.default
-      hermes-agent.packages.${system}.default
       pkgs.bubblewrap
     ];
 

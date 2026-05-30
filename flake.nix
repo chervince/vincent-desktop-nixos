@@ -22,16 +22,12 @@
       url = "github:sadjow/codex-cli-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hermes-agent = {
-      url = "github:NousResearch/hermes-agent";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { nixpkgs, home-manager, claude-code, codex-cli-nix, hermes-agent, ... }: {
+  outputs = { nixpkgs, home-manager, claude-code, codex-cli-nix, ... }: {
     nixosConfigurations.vincent-desktop-nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit claude-code codex-cli-nix hermes-agent; };
+      specialArgs = { inherit claude-code codex-cli-nix; };
       modules = [
         ./hardware-configuration.nix
         ./parts
