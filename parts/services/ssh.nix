@@ -1,4 +1,4 @@
-# SSH — serveur (clés uniquement) + client 10 hosts via Home Manager
+# SSH — serveur (clés uniquement) + client 11 hosts via Home Manager
 { ... }:
 {
   # Serveur SSH — authentification par clé uniquement
@@ -84,6 +84,15 @@
         port = 2222;
         identityFile = "~/.ssh/id_ed25519";
         extraOptions = { ServerAliveInterval = "60"; ServerAliveCountMax = "3"; };
+      };
+      "forge-shell" = {
+        hostname = "forge-shell.neithforge.dev";
+        user = "vincent";
+        identityFile = "~/.ssh/neith-forge";
+        # IdentitiesOnly: forge-shell sshd is fail2ban-hardened (24h ban + recidive
+        # jail 7d, per ADR-0019). Without this, ssh-agent would try every loaded
+        # key in order, racking up failed auth attempts that could ban the operator.
+        extraOptions = { IdentitiesOnly = "yes"; ServerAliveInterval = "60"; ServerAliveCountMax = "3"; };
       };
     };
   };
