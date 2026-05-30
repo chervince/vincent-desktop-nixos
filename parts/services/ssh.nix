@@ -17,7 +17,24 @@
   home-manager.users.vincent.programs.ssh = {
     enable = true;
 
+    # On ne laisse plus home-manager injecter ses défauts implicites dans le
+    # bloc `Host *` (comportement déprécié) : on les déclare nous-mêmes ci-dessous.
+    enableDefaultConfig = false;
+
     matchBlocks = {
+      # Anciens défauts home-manager conservés explicitement pour tous les hosts.
+      "*" = {
+        forwardAgent = false;
+        addKeysToAgent = "no";
+        compression = false;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "no";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "no";
+      };
       "mailserver-neith" = {
         hostname = "172.232.44.63";
         user = "root";
