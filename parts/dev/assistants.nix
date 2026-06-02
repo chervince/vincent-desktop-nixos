@@ -9,6 +9,7 @@ in
     home.packages = [
       claude-code.packages.${system}.default
       codex-cli-nix.packages.${system}.default
+      pkgs.pi-coding-agent      # ← Pi (terminal coding agent)
       pkgs.bubblewrap
     ];
 
