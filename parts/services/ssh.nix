@@ -111,6 +111,15 @@
         # key in order, racking up failed auth attempts that could ban the operator.
         extraOptions = { IdentitiesOnly = "yes"; ServerAliveInterval = "60"; ServerAliveCountMax = "3"; };
       };
+      # Track C App-VPS — facturation-neith (Linode Sydney, ADR-0017).
+      # Operator user, key-only auth. IdentitiesOnly: host sshd is fail2ban-hardened,
+      # so we offer only the operator key instead of every agent-loaded key.
+      "neith-fact" = {
+        hostname = "172.105.177.107";
+        user = "vincent";
+        identityFile = "~/.ssh/neith-forge";
+        extraOptions = { IdentitiesOnly = "yes"; ServerAliveInterval = "60"; ServerAliveCountMax = "3"; };
+      };
     };
   };
 }

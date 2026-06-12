@@ -5,6 +5,7 @@
   environment.systemPackages = with pkgs; [
     mangohud
     gamescope
+    luanti # ex-Minetest (voxel sandbox)
   ];
 
   # NVIDIA hardware video decode
