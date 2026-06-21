@@ -3,6 +3,10 @@
 {
   services.printing.enable = true;
 
+  # Pas de cups-browsed : on a une queue déclarée (ci-dessous), inutile de
+  # laisser cups-browsed auto-créer un doublon depuis l'annonce mDNS.
+  services.printing.browsed.enable = false;
+
   # Découverte réseau mDNS — restaure l'auto-détection des imprimantes/services
   # (UDP 5353 ouvert via openFirewall)
   services.avahi = {
