@@ -46,15 +46,25 @@
     options = [ "nofail" "uid=1000" "gid=100" "dmask=022" "fmask=133" ];
   };
 
-  # zram — swap compressé en RAM (zstd), remplace le swapfile disque.
-  # 25% de 31 Gio ≈ 7,7 Gio compressés, ~20+ Gio effectifs avec zstd.
-  swapDevices = [ ];
+  # ── Swap à deux étages ────────────────────────────────────────────────
+  # 1) zram = RAM compressée (zstd), rapide, première ligne de défense.
+  #    NOTE : c'est de la RAM, pas de la capacité en plus (25% de 31 Gio ≈ 7,7 Gio).
   zramSwap = {
     enable = true;
     memoryPercent = 25;
     algorithm = "zstd";
+    priority = 5;            # prioritaire sur le swap disque
   };
 
-  # Swappiness élevée pour zram (compression RAM rapide, pas de disque)
-  boot.kernel.sysctl."vm.swappiness" = 100;
+  # 2) Filet de secours DISQUE (16 Gio) sur le btrfs/LUKS. Absorbe le pic
+  #    mémoire d'un jeu AAA au lieu de déclencher l'OOM-killer / le freeze.
+  #    Priorité < zram ⇒ utilisé seulement quand le zram est saturé.
+  #    Fichier créé une fois via `btrfs filesystem mkswapfile` (NoCoW, non compressé).
+  #    Pas de `size` ici ⇒ NixOS ne le recrée pas (évite le piège CoW btrfs).
+  swapDevices = [
+    { device = "/swap/swapfile"; priority = 1; }
+  ];
+
+  # zram reste prioritaire ; 80 suffit dès qu'un fallback disque existe.
+  boot.kernel.sysctl."vm.swappiness" = 80;
 }
