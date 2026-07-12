@@ -10,5 +10,6 @@
     ./temux.nix
     ./sops.nix
     ./tmux.nix
+    ./herdr.nix
   ];
 }

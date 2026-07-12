@@ -18,6 +18,11 @@ in
       CODEX_HOME = "$HOME/.config/codex";
     };
 
+    # Kimi CLI — binaire auto-installé hors Nix (~/.kimi-code/bin), on déclare juste le PATH
+    programs.fish.shellInit = ''
+      fish_add_path $HOME/.kimi-code/bin
+    '';
+
     # Sourcer les clés API depuis un fichier .env non versionné
     programs.fish.interactiveShellInit = ''
       if test -f ~/.config/ai-keys.env
