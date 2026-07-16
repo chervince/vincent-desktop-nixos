@@ -15,5 +15,6 @@
     mpv
     obsidian
     discord
+    kdePackages.kcalc  # calculatrice native Plasma
   ];
 }
