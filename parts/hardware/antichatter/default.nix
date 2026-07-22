@@ -18,10 +18,11 @@ in
     # Le match NAME + EV_KEY:[KEY_E] cible les 2 interfaces clavier du
     # Falchion (event-kbd + if03, celles capturées le 2026-07-06) et
     # laisse tranquilles la souris G502 et le reste.
-    # Seuil : 30 ms (rebonds mesurés ≤ 11 ms ; ré-appui humain ≥ ~60 ms).
-    # Marge de réglage si le switch se dégrade : jusqu'à ~45 ms.
+    # Seuil : 45 ms — monté depuis 30 ms le 2026-07-23, des rafales passaient
+    # encore (switch qui se dégrade). Plafond avant de gêner la frappe :
+    # ré-appui humain ≥ ~60 ms.
     udevmonConfig = ''
-      - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${debounce}/bin/debounce 30 | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
+      - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${debounce}/bin/debounce 45 | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
         DEVICE:
           NAME: "ASUSTeK ROG FALCHION ACE"
           EVENTS:
